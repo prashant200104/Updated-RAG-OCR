@@ -4,6 +4,7 @@ from typing import Tuple, List
 import os
 from dotenv import load_dotenv
 import openai
+import streamlit as st
 
 import fitz  # PyMuPDF
 from langchain.docstore.document import Document
