@@ -64,10 +64,14 @@ def generate_initial_responses(pdf_extracts, question, document_names):
                 temperature=0.2
             )
             response = completion.choices[0].message.content
+            # Check for empty or unrelated responses and apply fallback
+            if not response.strip() or "Did not get any Related Information" in response:
+                response = "Sorry, I didn’t understand your question. Do you want to connect with a live agent?"
             combined_responses.append((doc_name, response.strip()))
         except Exception as e:
             st.error(f"An error occurred: {e}")
     return combined_responses
+
 
 def refine_combined_response(combined_response_text, question):
     formatted_prompt = f"""
